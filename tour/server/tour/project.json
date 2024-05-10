@@ -1,0 +1,31 @@
+{
+  "name": "svr-tour",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "server/tour/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "svr-tour:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "svr-tour:build:development"
+        },
+        "production": {
+          "buildTarget": "svr-tour:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "server/tour/jest.config.ts"
+      }
+    }
+  }
+}
