@@ -1,9 +1,4 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-
-//
-import {IUser} from "@tour/lib-dto"
-import { isNumberObject } from 'util/types';
 
 @Schema()
 export class User {
@@ -14,21 +9,10 @@ export class User {
     @Prop()
     email?: string    
 
-    
-    @Prop({
-        set: function(v: string) {
-            console.log("User: @Prop() password", this.password)
-            return v.toUpperCase()
-        }
-    })
+    // Пока просто не возвращаем клиенту (см UserSevice)
+    @Prop()
     password: string
 }
 
 // export type UserDocument = HydratedDocument<User>;
 export const UserSchema = SchemaFactory.createForClass(User);
-
-export class UserDto implements IUser {
-    login: string
-    password?: string
-    email?: string    
-}

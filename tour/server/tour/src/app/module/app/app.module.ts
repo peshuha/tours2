@@ -13,7 +13,7 @@ import { AuthModule } from '../auth/auth.module';
       connectionName: 'user',
     }),
     UserModule,
-    AuthModule,
+    // AuthModule,
   ],
   controllers: [],
   providers: [],

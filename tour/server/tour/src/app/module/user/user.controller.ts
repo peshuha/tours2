@@ -1,22 +1,21 @@
-import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from '../../module/user/user.service';
-import { User } from '../../mongo/user';
+import { UserDto } from '@lib-dto-js';
 
 @Controller('user')
 export class UserController {
     constructor(
         private user: UserService
     ) {
-
     }
 
-    @Get()
-    async getAll() {
-        return this.user.getAll()
+    @Get(":id")
+    async getById(@Param("id") id: string) {
+        return this.user.getById(id)
     }
 
     @Post()
-    async create(@Body("login") login) {
-        return this.user.create(login)
+    async create(@Body() user: UserDto) {
+        return this.user.create(user)
     }
 }

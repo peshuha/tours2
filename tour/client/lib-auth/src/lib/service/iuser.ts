@@ -4,4 +4,4 @@
 //   email?: string
 // }
 
-export * from "@tour/lib-dto"
+export * from "@lib-dto-js"

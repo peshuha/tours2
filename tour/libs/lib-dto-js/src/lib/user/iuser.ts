@@ -1,7 +1,7 @@
 export interface IUser {
+  id?: string
   login: string
   password?: string
   email?: string
 }
 
-// export * from "@tour/lib-dto"
