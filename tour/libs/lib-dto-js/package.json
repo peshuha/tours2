@@ -1,5 +1,5 @@
 {
-  "name": "@lib-dto-js",
+  "name": "lib-dto-js",
   "version": "0.0.1",
   "dependencies": {
     "tslib": "^2.3.0"
