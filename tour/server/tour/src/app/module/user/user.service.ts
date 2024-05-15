@@ -19,8 +19,12 @@ export class UserService {
         return this.md.find().exec()
     }
 
-    async getById(id: string) {
+    async getByIdAsync(id: string) {
         return this.md.findById(id)
+    } 
+
+    async getById(id: string) {
+        return await this.md.findById(id).exec()
     } 
 
     async create(user: UserDto): Promise<User> {
@@ -41,4 +45,15 @@ export class UserService {
         console.log("UserService::create.user", usr2)
         return usr2.save()
     }
-}
+
+    async changePassword(id: string, password: string) {
+        try {
+            const usr = await this.md.findByIdAndUpdate(id, {password}).exec()
+            console.log("changePassword", usr)
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+  }
