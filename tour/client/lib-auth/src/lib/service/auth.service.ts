@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {LocalStorageService} from '@tour/lib-common'
 import {IUser} from "./iuser";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthService {
   private login: string = ""
 
   constructor(
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private http: HttpClient
   ) {
     this.login = this.GetLogin() || ""
   }

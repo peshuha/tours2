@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MessageService} from "primeng/api";
 import {HttpClientModule} from "@angular/common/http";
 import { NotFoundComponent } from './page/not-found/not-found.component';
-import {ConfigService} from "./service/config/config.service";
+import {ConfigService} from "@tour/lib-common";
 
 @NgModule({
   declarations: [
