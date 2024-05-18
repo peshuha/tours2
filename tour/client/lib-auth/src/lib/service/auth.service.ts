@@ -26,7 +26,7 @@ export class AuthService {
     password: string,
     email: string,
     save: boolean
-  ): never | Subscription {
+  ): never | Promise<IUser> {
     if (!login) {
       throw new Error('login is empty');
     }
@@ -36,33 +36,22 @@ export class AuthService {
     }
 
     console.log('auth.register');
-    return this.http
-      .post<IUser>(ConfigService.Config?.tourservice + '/user', {
+    return new Promise<IUser>((resolve, reject) => {
+      this.http.post<IUser>(ConfigService.Config?.tourservice + '/user', {
         login,
         password,
         email,
       })
-      .subscribe((user: IUser) => {
-        console.log('auth.register.subscribe', user);
-
-        // Получаем users
-        const data = this.storageService.getItem(this.CONST_KEY_STORAGE_USERS);
-        let users: IUser[] = [];
-        if (data) {
-          users = <IUser[]>JSON.parse(data);
+      .subscribe(
+        (user: IUser) => {
+          console.log('auth.register.subscribe', user);
+          resolve(user);
         }
-
-        // Запоминаем нового участника
-        this.storageService.setItem(
-          this.CONST_KEY_STORAGE_USERS,
-          JSON.stringify([
-            ...users.filter((user) => user.login !== login),
-            user,
-          ])
-        );
-
-        return this.Authorize(login, password, save);
-      });
+        , (err) => {
+          reject(err)
+        }
+      )
+    })
   }
 
   public Register0(
@@ -104,6 +93,34 @@ export class AuthService {
     this.Authorize(login, password, save);
   }
 
+  public Authorize(
+    login: string | null,
+    password: string | null,
+    save: boolean = false
+  ): Promise<IToken> | never {
+    if (!login) {
+      throw new Error('login is empty');
+    }
+
+    console.log('AuthService::Authorize', save);
+    return new Promise<IToken>((resolve, reject) => {
+      this.http.post<IToken>(ConfigService.Config?.tourservice + '/auth/login', {
+        login,
+        password,
+      })
+      .subscribe(
+        (token: IToken) => {
+          console.log('AuthService::Authorize.subscribe', token);
+          resolve(token)
+        },
+        (e) => {
+          console.log('AuthService::Authorize.subscribe/catch', e);
+          throw new Error('Не могу пройти авторизацию');
+        }
+      );
+    })
+  }
+
   public IsSingIn(): boolean {
     return !!this.storageService.getItem(this.CONST_KEY_STORAGE_TOKEN);
   }
@@ -112,41 +129,6 @@ export class AuthService {
     return (
       this.storageService.getItem(this.CONST_KEY_STORAGE_LOGIN) || this.login
     );
-  }
-
-  public Authorize(
-    login: string | null,
-    password: string | null,
-    save: boolean = false
-  ): Subscription | never {
-    if (!login) {
-      throw new Error('login is empty');
-    }
-
-    console.log('AuthService::Authorize', save);
-    return this.http
-      .post<IToken>(ConfigService.Config?.tourservice + '/auth/login', {
-        login,
-        password,
-      })
-      .subscribe(
-        (token: IToken) => {
-          console.log('AuthService::Authorize.subscribe', token);
-          this.storageService.setItem(
-            this.CONST_KEY_STORAGE_TOKEN,
-            token.access_token
-          );
-
-          this.storageService.removeItem(this.CONST_KEY_STORAGE_LOGIN);
-          if (save) {
-            this.storageService.setItem(this.CONST_KEY_STORAGE_LOGIN, login);
-          }
-        },
-        (e) => {
-          console.log('AuthService::Authorize.subscribe/catch', e);
-          throw new Error('Не могу пройти авторизацию');
-        }
-      );
   }
 
   public Authorize0(

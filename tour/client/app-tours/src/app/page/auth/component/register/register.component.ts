@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "@tour/lib-auth";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
+import { IToken, IUser } from '@tour/lib-dto-js';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Component({
   selector: 'sb-register',
@@ -27,14 +29,20 @@ export class RegisterComponent implements OnInit {
   }
 
   OnRegister() {
-    try {
       this.auth.Register(this.login, this.password, this.email, this.save)
-      this.msgService.add({ severity: 'success', summary: 'Успешно Зарегистрирован!', detail: `Добро пожаловать, ${this.login}`})
-      this.router.navigate(["tour"]).then()
-    }
-    catch (e: any) {
-      this.error_message = e
-      this.msgService.add({ severity: 'error', summary: e, detail: 'Ошибочкос'})
-    }
+      .then((user: IUser) => {
+        // Авторизуемся
+        return this.auth.Authorize(this.login, this.password, this.save)
+      })
+      .then((token: IToken) => {
+        
+        this.msgService.add({ severity: 'success', summary: 'Успешно Зарегистрирован!', detail: `Добро пожаловать, ${this.login}`})
+        this.router.navigate(["tour"]).then()
+      }) 
+      .catch ((error) => {
+        this.error_message = error
+        this.msgService.add({ severity: 'error', summary: error, detail: 'Ошибочкос'})
+      }
+    )
   }
 }
