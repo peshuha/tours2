@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
       this.auth.Register(this.login, this.password, this.email, this.save)
       .then((user: IUser) => {
         // Авторизуемся
+        console.log("RegisterComponent::Register", user)
         return this.auth.Authorize(this.login, this.password, this.save)
       })
       .then((token: IToken) => {

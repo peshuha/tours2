@@ -1,5 +1,5 @@
 {
-  "name": "lib-dto-js",
+  "name": "@tour/lib-dto-js",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "client/lib-dto-js/src",
   "projectType": "library",

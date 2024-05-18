@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "@tour/lib-auth";
+import { IToken } from '@tour/lib-dto-js';
 import {MessageService} from "primeng/api";
 
 @Component({
@@ -29,15 +30,15 @@ export class SignComponent implements OnInit{
 
   OnClick() {
     this.error_message = ""
-    try {
-      this.authService.Authorize(this.login, this.password, this.save_login)
+    this.authService.Authorize(this.login, this.password, this.save_login)
+    .then((token: IToken) => {
+      console.log("SignComponent::token", token)
       this.msgService.add({ severity: 'success', summary: 'Успешно!', detail: `Добро пожаловать, ${this.login}`})
       this.router.navigate(["tours"])
-    }
-    // @ts-ignore
-    catch (e: Error) {
-      this.msgService.add({ severity: 'error', summary: 'Error!', detail: e.message})
-      this.error_message = e.message
-    }
+    })
+    .catch( (error) => {
+      this.msgService.add({ severity: 'error', summary: 'Error!', detail: error.message})
+      this.error_message = error.message
+    })
   }
 }

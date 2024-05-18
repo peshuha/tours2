@@ -1,5 +1,5 @@
 {
-  "name": "lib-common",
+  "name": "@tour/lib-common",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "client/lib-common/src",
   "prefix": "lib",

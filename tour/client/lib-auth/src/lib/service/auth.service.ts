@@ -102,6 +102,10 @@ export class AuthService {
       throw new Error('login is empty');
     }
 
+    // clear
+    this.login = '';
+    this.storageService.removeItem(this.CONST_KEY_STORAGE_TOKEN);
+
     console.log('AuthService::Authorize', save);
     return new Promise<IToken>((resolve, reject) => {
       this.http.post<IToken>(ConfigService.Config?.tourservice + '/auth/login', {
@@ -111,6 +115,8 @@ export class AuthService {
       .subscribe(
         (token: IToken) => {
           console.log('AuthService::Authorize.subscribe', token);
+          this.login = login || '';
+          this.storageService.setItem(this.CONST_KEY_STORAGE_TOKEN, token.access_token);
           resolve(token)
         },
         (e) => {
@@ -157,10 +163,7 @@ export class AuthService {
     }
 
     this.login = login || '';
-    this.storageService.setItem(
-      this.CONST_KEY_STORAGE_TOKEN,
-      `Okey, ${this.login}`
-    );
+    this.storageService.setItem(this.CONST_KEY_STORAGE_TOKEN, `Okey, ${this.login}`);
 
     this.storageService.removeItem(this.CONST_KEY_STORAGE_LOGIN);
     if (save) {

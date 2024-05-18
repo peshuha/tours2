@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy, OnChanges{
   items: MenuItem[] | undefined;
   login = ""
   dtNow: number = Date.now();
-  timer: number | undefined
+  timer: any | undefined
   is_search = false
 
   constructor(

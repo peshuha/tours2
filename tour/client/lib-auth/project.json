@@ -1,5 +1,5 @@
 {
-  "name": "lib-auth",
+  "name": "@tour/lib-auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "client/lib-auth/src",
   "prefix": "lib",

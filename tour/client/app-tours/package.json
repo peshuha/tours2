@@ -1,5 +1,5 @@
 {
-  "name": "app-tours",
+  "name": "@tour/app-tours",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "concurrently \"npm run build:lib-common\" \"npm run build:lib-auth\" ",
     "build:lib-common": "ng build lib-common",
     "build:lib-auth": "ng build lib-auth",
-    "build:app-tours": "ng build app-tours",
+    "build:app-tours": "ng build @tour/app-tours",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
