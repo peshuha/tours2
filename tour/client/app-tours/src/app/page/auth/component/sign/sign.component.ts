@@ -31,8 +31,7 @@ export class SignComponent implements OnInit{
   OnClick() {
     this.error_message = ""
     this.authService.Authorize(this.login, this.password, this.save_login)
-    .then((token: IToken) => {
-      console.log("SignComponent::token", token)
+    .then(() => {
       this.msgService.add({ severity: 'success', summary: 'Успешно!', detail: `Добро пожаловать, ${this.login}`})
       this.router.navigate(["tours"])
     })

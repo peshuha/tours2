@@ -72,7 +72,7 @@ export class OrderService {
     }
 
     // Пока только верхний уровень
-    return this.BuildTreeGroupBy(tb, groupby[0])
+    return this.BuildTreeGroupBy(tb, [groupby[0]])
   }
 
 

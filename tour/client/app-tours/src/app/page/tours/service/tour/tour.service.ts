@@ -1,8 +1,7 @@
 import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {TourRestService} from "../rest/tour-rest.service";
 import {Observable, ReplaySubject, Subject} from "rxjs";
-import {ITour} from "../../../../model/itour";
-import {ITourFilter, TourType} from "../../../../model/i-tour-filter";
+import {ITour, ITourFilter, TourType} from "@tour/lib-dto-js";
 import {TourLocationRestService} from "../rest/tour-location-rest.service";
 import {TourNearestRestService} from "../rest/tour-nearest-rest.service";
 

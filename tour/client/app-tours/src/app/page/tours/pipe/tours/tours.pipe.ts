@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {ITour} from "../../../../model/itour";
+import {ITour} from "@tour/lib-dto-js";
 
 @Pipe({
   name: 'tours'

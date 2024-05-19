@@ -12,6 +12,14 @@ const routes: Routes = [
     title: "Продажа туров",
     children: [
       {
+        path: "", component: ToursListComponent,
+        title: "Внимание распродажа!",
+        // pathMatch: "full",
+        data: {
+          aside: true
+        }
+      },
+      {
         path: "tour/:id",
         title: "Детальная инфо о туре",
         // pathMatch: "full"

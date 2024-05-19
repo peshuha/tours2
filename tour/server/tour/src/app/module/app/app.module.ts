@@ -8,7 +8,6 @@ import { jwtConstants } from '../auth/jwt.constant';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProfileModule } from '../profile/profile.module';
-import { UserService } from '../user/user.service';
 
 @Module({
   imports: [
@@ -35,7 +34,6 @@ import { UserService } from '../user/user.service';
       provide: APP_GUARD,
       useClass: AuthGuard
     },
-    // UserService
   ],
 })
 export class AppModule {}

@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tour/lib-dto-js": ["client/lib-dto-js/src/index.ts"],
       "@tour/lib-auth": ["client/lib-auth/src/index.ts"],
-      "@tour/lib-common": ["client/lib-common/src/index.ts"]
+      "@tour/lib-common": ["client/lib-common/src/index.ts"],
+      "@tour/lib-dto-js": ["client/lib-dto-js/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

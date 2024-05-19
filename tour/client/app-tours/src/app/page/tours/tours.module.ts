@@ -73,9 +73,6 @@ import { NearestTourFinderComponent } from './component/nearest-tour-finder/near
     TourLocationRestService,
     TourService,
     SearchStringService,
-    {
-      provide: HTTP_INTERCEPTORS, useClass:  AuthInterceptor, multi: true
-    }
   ]
 })
 export class ToursModule {

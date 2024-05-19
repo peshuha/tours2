@@ -21,12 +21,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let req = request
     const token = this.svcUser.GetToken()
-    // console.log("AuthInterceptor::intercept", token, request.url, request.headers.keys())
+    console.log("AuthInterceptor::intercept", token, request.url)
 
     if(!!token) {
 
       req = request.clone({
-        headers: req.headers.append("Authorize", `Bearer ${token}`)
+        headers: req.headers.append("Authorization", `Bearer ${token}`)
       })
 
 

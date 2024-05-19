@@ -7,24 +7,29 @@ import {
   Post,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto } from '@tour/lib-dto-js';
+import { AuthDto, UserDto } from '@tour/lib-dto-js';
 import { AuthGuard } from './auth.guard';
 import { Public } from './auth.public';
+import { UserService } from '../user/user.service';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private usr: UserService
+  ) {}
 
   @Public()
-  @Post('login')
+  @Post("login")
   async login(@Body() dt: AuthDto) {
     console.log('AuthController::login', dt);
     return this.auth.signIn(dt.login, dt.password);
   }
 
-  // @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req['__user'];
+  @Public()
+  @Post("register")
+  register(@Body() user: UserDto) {
+      return this.usr.create(user)
   }
+
 }

@@ -1,7 +1,7 @@
 import {importProvidersFrom, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ITour} from "../../../../model/itour";
+import {ITour} from "@tour/lib-dto-js";
 
 @Injectable(
 )

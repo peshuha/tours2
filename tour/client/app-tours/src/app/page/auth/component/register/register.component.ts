@@ -4,6 +4,7 @@ import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import { IToken, IUser } from '@tour/lib-dto-js';
 import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
+import { resolve } from 'path';
 
 @Component({
   selector: 'sb-register',
@@ -35,10 +36,9 @@ export class RegisterComponent implements OnInit {
         console.log("RegisterComponent::Register", user)
         return this.auth.Authorize(this.login, this.password, this.save)
       })
-      .then((token: IToken) => {
-        
+      .then(() => {
         this.msgService.add({ severity: 'success', summary: 'Успешно Зарегистрирован!', detail: `Добро пожаловать, ${this.login}`})
-        this.router.navigate(["tour"]).then()
+        this.router.navigate(["tours"]).then()
       }) 
       .catch ((error) => {
         this.error_message = error

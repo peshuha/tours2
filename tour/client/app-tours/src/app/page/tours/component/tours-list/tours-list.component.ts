@@ -7,7 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {TourService} from "../../service/tour/tour.service";
-import {ITour} from "../../../../model/itour";
+import {ITour} from "@tour/lib-dto-js";
 import {SearchStringService} from "../../service/search-string/search-string.service";
 import {Observable, ReplaySubject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";

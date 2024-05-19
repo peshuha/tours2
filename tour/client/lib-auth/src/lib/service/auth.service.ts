@@ -37,7 +37,7 @@ export class AuthService {
 
     console.log('auth.register');
     return new Promise<IUser>((resolve, reject) => {
-      this.http.post<IUser>(ConfigService.Config?.tourservice + '/user', {
+      this.http.post<IUser>(ConfigService.Config?.tourservice + '/register', {
         login,
         password,
         email,
@@ -97,18 +97,19 @@ export class AuthService {
     login: string | null,
     password: string | null,
     save: boolean = false
-  ): Promise<IToken> | never {
+  ): Promise<void> | never {
     if (!login) {
       throw new Error('login is empty');
     }
 
     // clear
     this.login = '';
+    this.storageService.removeItem(this.CONST_KEY_STORAGE_LOGIN);
     this.storageService.removeItem(this.CONST_KEY_STORAGE_TOKEN);
 
     console.log('AuthService::Authorize', save);
-    return new Promise<IToken>((resolve, reject) => {
-      this.http.post<IToken>(ConfigService.Config?.tourservice + '/auth/login', {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post<IToken>(ConfigService.Config?.tourservice + '/login', {
         login,
         password,
       })
@@ -116,12 +117,13 @@ export class AuthService {
         (token: IToken) => {
           console.log('AuthService::Authorize.subscribe', token);
           this.login = login || '';
+          this.storageService.setItem(this.CONST_KEY_STORAGE_LOGIN, login)
           this.storageService.setItem(this.CONST_KEY_STORAGE_TOKEN, token.access_token);
-          resolve(token)
+          resolve()
         },
         (e) => {
           console.log('AuthService::Authorize.subscribe/catch', e);
-          throw new Error('Не могу пройти авторизацию');
+          reject(new Error('Не могу пройти авторизацию'))
         }
       );
     })
@@ -181,7 +183,32 @@ export class AuthService {
     return this.storageService.getItem(this.CONST_KEY_STORAGE_TOKEN);
   }
 
-  public ChangePassword(psw_current: string, psw_new: string): void {
+  public ChangePassword(password: string, new_password: string) {
+
+    // Пустой пароль не катит
+    if (!new_password) {
+      throw new Error('Пароль не должен быть пустым. Отказано');
+    }
+
+    return new Promise<void>((resolve, reject) => {
+      this.http.post<boolean>(ConfigService.Config?.tourservice + '/profile/changepassword', {
+        password,
+        new_password
+      })
+      .subscribe(
+        (isok: boolean) => {
+          console.log('AuthService::ChangePassword.subscribe/ok');
+          resolve()
+        },
+        (e) => {
+          console.log('AuthService::ChangePassword.subscribe/catch', e);
+          reject(new Error('Не могу пройти авторизацию'))
+        }
+      );
+    })
+  }
+
+  public ChangePassword0(psw_current: string, psw_new: string): void {
     // Сначла убеждаемся что авторизация пройдена
     if (!this.GetToken()) {
       throw new Error('Требуется авторизоваться. Отказано');

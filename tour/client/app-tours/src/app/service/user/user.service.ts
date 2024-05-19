@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AuthService} from "@tour/lib-auth";
-import {IUser} from "../../model/iuser";
+import {IUser} from "@tour/lib-dto-js";
 
 @Injectable({
   providedIn: 'root',

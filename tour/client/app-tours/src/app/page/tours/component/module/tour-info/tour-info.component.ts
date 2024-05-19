@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TourService} from "../../../service/tour/tour.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ITour} from "../../../../../model/itour";
+import {ITour} from "@tour/lib-dto-js";
 import {forkJoin, Observable} from "rxjs";
 import {TourNearestRestService} from "../../../service/rest/tour-nearest-rest.service";
 

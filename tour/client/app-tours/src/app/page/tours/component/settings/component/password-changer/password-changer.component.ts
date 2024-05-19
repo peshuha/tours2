@@ -24,16 +24,19 @@ export class PasswordChangerComponent implements OnInit{
 
   OnOk() {
 
-    try {
       this.auth.ChangePassword(this.psw_current, this.psw_new)
-      this.msg.Ok("Успешно!")
-      // @ts-ignore
-    } catch (e: Error) {
-      this.msg.Error(e.message)
-    }
-
-    this.psw_current = ""
-    this.psw_new = ""
-    this.psw_confirm = ""
+      .then(() => {
+        return this.auth.Authorize(this.auth.GetLogin(), this.psw_new)
+      })
+      .then(() => {
+        this.psw_current = ""
+        this.psw_new = ""
+        this.psw_confirm = ""
+        
+        this.msg.Ok("Успешно!")      
+      })
+      .catch((error) => {
+        this.msg.Error(error.message)
+      })
   }
 }

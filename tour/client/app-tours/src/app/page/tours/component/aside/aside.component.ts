@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IMenuType, MenuType} from "../../../../model/imenu-type";
 import {DropdownChangeEvent} from "primeng/dropdown";
-import {ITourFilter, TourFilter} from "../../../../model/i-tour-filter";
+import {ITourFilter, TourFilter} from "@tour/lib-dto-js";
 import {TourService} from "../../service/tour/tour.service";
 import {NotifierService} from "../../../../service/notifier/notifier.service";
 

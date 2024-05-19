@@ -4,7 +4,11 @@ import { UserService } from '../user/user.service';
 import { UserModule } from '../user/user.module';
 
 @Module({
-    controllers: [ProfileController],
-    imports: [UserModule]
+    imports: [
+        UserModule
+    ],
+    controllers: [
+        ProfileController
+    ],
 })
 export class ProfileModule {}

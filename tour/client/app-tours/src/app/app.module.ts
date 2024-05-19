@@ -8,9 +8,10 @@ import {TabViewModule} from "primeng/tabview";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MessageService} from "primeng/api";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NotFoundComponent } from './page/not-found/not-found.component';
 import {ConfigService} from "@tour/lib-common";
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,9 @@ import {ConfigService} from "@tour/lib-common";
       useFactory: ConfigService.ConfigInitialize,
       deps: [ConfigService],
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass:  AuthInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent]

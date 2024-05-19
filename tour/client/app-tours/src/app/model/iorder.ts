@@ -1,4 +1,4 @@
-import {ITour} from "./itour";
+import {ITour} from "@tour/lib-dto-js";
 
 export  type  IOrder = ITour | {
   date?: string,

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../../mongo/user';
 import { Model } from 'mongoose';
-import { UserDto } from '@tour/lib-dto-js';
+import { AuthDto, UserDto } from '@tour/lib-dto-js';
 
 @Injectable()
 export class UserService {
@@ -24,7 +24,7 @@ export class UserService {
     return await this.md.findById(id).exec();
   }
 
-  async create(user: UserDto): Promise<User> {
+  async create(user: UserDto) {
     console.log('UserService::create', user);
 
     // Есть ли такой уже
@@ -52,5 +52,10 @@ export class UserService {
     }
 
     return true;
+  }
+
+  async save(id: string, usr: UserDto) {
+    console.log("UserService::save", id, usr)
+    return this.md.findByIdAndUpdate(id, usr)
   }
 }
