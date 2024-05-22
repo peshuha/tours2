@@ -37,6 +37,7 @@ export class TourInfoComponent implements OnInit{
   ngOnInit(): void {
 
     const id = this.aroute.snapshot.paramMap.get("id")
+    console.log("TourInfoComponent::ngOnInit()", id)
     this.tour = this.svcTours.findTour(id)
     if(!this.tour) {
       this.router.navigate(["/unknown"])

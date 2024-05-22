@@ -4,6 +4,7 @@ import {DropdownChangeEvent} from "primeng/dropdown";
 import {ITourFilter, TourFilter} from "@tour/lib-dto-js";
 import {TourService} from "../../service/tour/tour.service";
 import {NotifierService} from "../../../../service/notifier/notifier.service";
+import { TourRestService } from '../../service/rest/tour-rest.service';
 
 @Component({
   selector: 'sb-aside',
@@ -31,7 +32,8 @@ export class AsideComponent implements OnInit {
 
   constructor(
     private svcTour: TourService,
-    private msg: NotifierService
+    private msg: NotifierService,
+    private rtour: TourRestService
   ) {
   }
 
@@ -62,5 +64,15 @@ export class AsideComponent implements OnInit {
         this.msg.Error('error', error.message)
       }
     )
+  }
+
+  OnToursInitialize() {
+
+    this.rtour.initialize(10)
+  }
+
+  OnToursReset() {
+
+    this.rtour.reset()
   }
 }

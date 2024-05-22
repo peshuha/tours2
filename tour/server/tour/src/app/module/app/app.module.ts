@@ -8,6 +8,7 @@ import { jwtConstants } from '../auth/jwt.constant';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProfileModule } from '../profile/profile.module';
+import { TourModule } from '../tour/tour.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { ProfileModule } from '../profile/profile.module';
     }),
     UserModule,
     AuthModule,
-    ProfileModule
+    ProfileModule,
+    TourModule
   ],
   controllers: [],
   providers: [

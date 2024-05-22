@@ -28,11 +28,11 @@
       *ngFor="let tour of tours | tours: (tourFilter | async)"
 
       (dblclick)="OnDoubleClick(tour)"
-      [attr.itemid]="tour.id"
+      [attr.itemid]="tour._id"
       class="tour"
     >
       <p>{{tour.name}}</p>
-      <img src="/assets/img/{{tour.img}}" alt="" height="150px" width="200px">
+      <img src="{{imgbaseurl}}/assets/img/{{tour.img}}" alt="" height="150px" width="200px">
     </div>
   </div>
 

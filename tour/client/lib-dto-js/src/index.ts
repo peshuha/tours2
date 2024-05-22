@@ -5,3 +5,4 @@ export * from './lib/auth/iauth';
 export * from './lib/auth/itoken';
 export * from './lib/tour/i-tour-filter';
 export * from './lib/tour/itour';
+export * from './lib/tour/tour.dto';

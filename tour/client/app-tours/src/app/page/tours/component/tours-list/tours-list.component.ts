@@ -12,6 +12,7 @@ import {SearchStringService} from "../../service/search-string/search-string.ser
 import {Observable, ReplaySubject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ItemsSelectorDirective} from "../../../../directive/items-selector.directive";
+import { ConfigService } from '@tour/lib-common';
 
 
 @Component({
@@ -22,6 +23,7 @@ import {ItemsSelectorDirective} from "../../../../directive/items-selector.direc
 })
 export class ToursListComponent implements OnInit, OnDestroy  {
 
+  imgbaseurl = ConfigService.Config?.tourservice
   inloading = true
   tours: ITour[] | undefined;
   tourFilter: Observable<string> | undefined
@@ -39,6 +41,8 @@ export class ToursListComponent implements OnInit, OnDestroy  {
   ) {
   }
   ngOnInit(): void {
+    this.imgbaseurl = ConfigService.Config?.tourservice + ""
+    console.log("ToursListComponent::ngOnInit()", this.imgbaseurl)
     this.svcTours.getTours$().subscribe((data) => {
       this.tours = data
       this.inloading = false
@@ -56,8 +60,8 @@ export class ToursListComponent implements OnInit, OnDestroy  {
 
   // Используем активацию своим методом чз DoubleClick
   OnDoubleClick(tour: ITour) {
-    console.log("OnDoubleClick(e:Event)", tour.id)
-    this.router.navigate(["../tour", tour.id], {relativeTo: this.aroute})
+    console.log("OnDoubleClick(e:Event)", tour._id)
+    this.router.navigate(["../tour", tour._id], {relativeTo: this.aroute})
   }
 
   ngOnDestroy(): void {

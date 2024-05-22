@@ -98,7 +98,7 @@ export class TourService implements OnInit, OnDestroy{
     if(!id || !this.tours) {
       return null
     }
-    return this.tours.find((tour) => tour.id.toLowerCase() === id.toLowerCase()) || null
+    return this.tours.find((tour) => tour._id.toLowerCase() === id.toLowerCase()) || null
   }
 
   public TestError() {
