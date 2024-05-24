@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProfileModule } from '../profile/profile.module';
 import { TourModule } from '../tour/tour.module';
+import { Module1Module } from './module1.module';
 
 @Module({
   imports: [
@@ -16,8 +17,8 @@ import { TourModule } from '../tour/tour.module';
       global: true,
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: "2h"
-      }
+        expiresIn: '2h',
+      },
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/tour', {
       connectionName: 'tour',
@@ -28,13 +29,14 @@ import { TourModule } from '../tour/tour.module';
     UserModule,
     AuthModule,
     ProfileModule,
-    TourModule
+    TourModule,
+    Module1Module,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: AuthGuard
+      useClass: AuthGuard,
     },
   ],
 })

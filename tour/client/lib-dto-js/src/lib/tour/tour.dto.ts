@@ -7,6 +7,21 @@ export class TourDto implements  ITour {
     description: string = "";
     tourOperator: string = "";
     price: string = "";
-    img?: string = "";
+    img?: string[] = [];
     type?: TourType = "all";
-  }
+
+    constructor(
+      name: string,
+      description: string,
+      tourOperator: string,
+      price: string,
+      type: TourType
+    ) {
+      this.name = name
+      this.description = description
+      this.tourOperator = tourOperator
+      this.price = price
+      this.type = type || "all"
+      
+    }
+}

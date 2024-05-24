@@ -9,18 +9,20 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/module/app/app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { ConfigService } from './app/config/config.service';
 
 async function bootstrap() {
+
+  // Создаем экземпляр приложения
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // CORS
+  app.enableCors();
   // Доступ к public ресурсам
-  console.log("bootstrap()", __dirname)
-  console.log("bootstrap()", join(__dirname, '..', 'public/img'))
-
-  app.useStaticAssets(join(__dirname, '..', 'public/img'), {prefix: "/public_img"});
+  app.useStaticAssets(ConfigService.Config().public_img.path, {prefix: ConfigService.Config().public_img.prefix});
+  // Общие настройки сервака
   const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
-  app.enableCors();
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(

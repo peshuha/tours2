@@ -31,7 +31,7 @@ export class Tour {
     price: string;
 
     @Prop()
-    img?: string;
+    img?: string[];
 
     @Prop()
     type?: string = "all";

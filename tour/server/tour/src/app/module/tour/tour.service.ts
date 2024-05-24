@@ -10,18 +10,24 @@ export class TourService {
         @InjectModel(Tour.name, 'tour') private md: Model<Tour>
     ) {}
 
-    async create(tour: TourDto) {
-        const md = new this.md(tour);
-        console.log('TourService::create.md', md);
-        return md.save();    
-    }
-
     async getAll() {
         return this.md.find()
     }
 
     async getById(id: string) {
         return this.md.findById(id)
+    }
+
+    async create(tour: TourDto) {
+        const md = new this.md(tour);
+        console.log('TourService::create.md', md);
+        return md.save();    
+    }
+
+    async image_add(id: string, img: string) {
+        let tour = await this.md.findById(id)
+        tour.img.push(img)
+        return tour.save()
     }
 
     async syntetic_intialize(n: number) {
@@ -89,7 +95,7 @@ export class TourService {
     }
 
     async syntetic_reset() {
-        // Получаем все искусственные туры
+        // Удаляем все искусственные туры
         return this.md.deleteMany({is_syntetic: true})
     }
 }
