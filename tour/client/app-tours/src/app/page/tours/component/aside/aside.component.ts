@@ -68,11 +68,11 @@ export class AsideComponent implements OnInit {
 
   OnToursInitialize() {
 
-    this.rtour.initialize(10)
+    this.rtour.initialize(10).subscribe()
   }
 
   OnToursReset() {
 
-    this.rtour.reset()
+    this.rtour.reset().subscribe()
   }
 }

@@ -10,6 +10,11 @@ export class TourController {
         private tour: TourService
     ){}
 
+    @Get()
+    async getAll() {
+        return this.tour.getAll()
+    }
+
     @Post("syntetic-initialize")
     async intialize(@Body("n") n: number) {
         return this.tour.syntetic_intialize(n)
@@ -18,11 +23,6 @@ export class TourController {
     @Delete("syntetic-reset")
     async syntetic_reset() {
         return this.tour.syntetic_reset()
-    }
-
-    @Get()
-    async getAll() {
-        return this.tour.getAll()
     }
 
     @Get(":id")
