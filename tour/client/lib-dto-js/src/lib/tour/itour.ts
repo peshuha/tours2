@@ -1,4 +1,4 @@
-import { TourType } from './i-tour-filter';
+import {TourType} from "./i-tour-filter";
 
 export interface ITour {
   _id?: string;

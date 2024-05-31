@@ -15,15 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-<<<<<<< HEAD
       "@tour/lib-auth": ["client/lib-auth/src/index.ts"],
       "@tour/lib-common": ["client/lib-common/src/index.ts"],
       "@tour/lib-dto-js": ["client/lib-dto-js/src/index.ts"]
-=======
-      "@lib-dto-js": ["libs/lib-dto-js/src/index.ts"],
-      "@tour/lib-auth": ["libs/lib-auth/src/index.ts"],
-      "@tour/lib-common": ["libs/lib-common/src/index.ts"]
->>>>>>> a7cdc1d4547d926c2daac733fba0b1a8db41d291
     }
   },
   "exclude": ["node_modules", "tmp"]
