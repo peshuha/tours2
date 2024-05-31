@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD:tour/client/lib-dto-js/package.json
   "name": "@tour/lib-dto-js",
+=======
+  "name": "lib-dto-js",
+>>>>>>> a7cdc1d4547d926c2daac733fba0b1a8db41d291:tour/libs/lib-dto-js/package.json
   "version": "0.0.1",
   "dependencies": {
     "tslib": "^2.3.0"
