@@ -9,7 +9,7 @@ export class ConfigService {
             public_img: {
                 path: join(__dirname, "..", "public/img"),
                 prefix: "/public_img",
-                multer_path: "./public/img"
+                multer_path: join(__dirname, "..", "public/img")
             }
         }
     }

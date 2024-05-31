@@ -15,29 +15,38 @@ import { HydratedDocument } from 'mongoose';
 @Schema()
 export class Tour {
 
-    @Prop()
-    id?: string;
+    // @Prop()
+    // _id?: String;
 
     @Prop()
-    name: string;
+    name: String;
 
     @Prop()
-    description: string;
+    description: String;
 
     @Prop()
-    tourOperator: string;
+    tourOperator: String;
 
     @Prop()
-    price: string;
+    price: String;
 
     @Prop()
-    img?: string[];
+    img?: String;
 
     @Prop()
-    type?: string = "all";
+    imgs?: [String];
 
     @Prop()
-    is_syntetic?: boolean
+    type?: String = "all";
+
+    @Prop()
+    is_syntetic?: Boolean
+
+    @Prop()
+    files?: [String]
+
+    @Prop()
+    npics?: Number = 0
   }
 
 export type TourDocument = HydratedDocument<Tour>;

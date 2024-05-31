@@ -19,6 +19,7 @@ async function bootstrap() {
   // CORS
   app.enableCors();
   // Доступ к public ресурсам
+  console.log("bootstrap", ConfigService.Config().public_img.path, ConfigService.Config().public_img.prefix)
   app.useStaticAssets(ConfigService.Config().public_img.path, {prefix: ConfigService.Config().public_img.prefix});
   // Общие настройки сервака
   const globalPrefix = '';

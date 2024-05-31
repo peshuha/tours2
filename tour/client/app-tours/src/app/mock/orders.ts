@@ -1,4 +1,4 @@
-import {IOrder} from "../model/iorder";
+import { IOrder } from "@tour/lib-dto-js";
 
 export const MOCK_ORDERS: IOrder[] = [
   {

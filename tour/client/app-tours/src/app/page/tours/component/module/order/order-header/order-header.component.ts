@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {IOrderFilter, OrderService} from "../service/order.service";
 import {CheckboxChangeEvent} from "primeng/checkbox";
-import {IOrderKey} from "../../../../../../model/iorder";
+import { IOrderKey } from '@tour/lib-dto-js';
 
 @Component({
   selector: 'app-order-header',

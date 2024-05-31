@@ -12,12 +12,16 @@ const routes: Routes = [
     title: "Продажа туров",
     children: [
       {
-        path: "", component: ToursListComponent,
-        title: "Внимание распродажа!",
-        // pathMatch: "full",
-        data: {
-          aside: true
-        }
+        path: "", 
+        redirectTo: "tours-list",
+        pathMatch: "full"
+        // ,
+        // component: ToursListComponent,
+        // title: "Внимание распродажа!",
+        // // pathMatch: "full",
+        // data: {
+        //   aside: true
+        // }
       },
       {
         path: "tour/:id",

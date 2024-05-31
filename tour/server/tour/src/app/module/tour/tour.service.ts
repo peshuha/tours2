@@ -1,7 +1,7 @@
-import { Delete, Injectable } from '@nestjs/common';
+import { Delete, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Mongoose } from 'mongoose';
-import { Tour } from '../../mongo/tour';
+import { Tour, TourDocument } from '../../mongo/tour';
 import { TourDto, TourType } from '@tour/lib-dto-js';
 
 @Injectable()
@@ -21,15 +21,12 @@ export class TourService {
     async create(tour: TourDto) {
         const md = new this.md(tour);
         console.log('TourService::create.md', md);
-        return md.save();    
-    }
 
-    async image_add(id: string, img: string) {
-        let tour = await this.md.findById(id)
-        tour.img.push(img)
-        return tour.save()
+        const obj = await md.save(); 
+        console.log("TourService::create.obj", obj)
+        return obj
     }
-
+   
     async syntetic_intialize(n: number) {
 
         const names: string[] = [
@@ -85,7 +82,8 @@ export class TourService {
                 tourOperator : ops[Math.round(Math.random() * ops.length)] || ops[Math.round(Math.random() * ops.length)],
                 price : prices[Math.round(Math.random() * prices.length)] || prices[Math.round(Math.random() * prices.length)],
                 type : types[Math.round(Math.random() * types.length)] || types[Math.round(Math.random() * types.length)],
-                img : pics[Math.round(Math.random() * pics.length)] || pics[Math.round(Math.random() * pics.length)]
+                img : pics[Math.round(Math.random() * pics.length)] || pics[Math.round(Math.random() * pics.length)],
+                imgs : [pics[Math.round(Math.random() * pics.length)] || pics[Math.round(Math.random() * pics.length)]]
             }
 
             console.log("TourService::intialize", tour)
@@ -97,5 +95,20 @@ export class TourService {
     async syntetic_reset() {
         // Удаляем все искусственные туры
         return this.md.deleteMany({is_syntetic: true})
+    }
+
+    async image_add(id: string, img: string) {
+        let tour = await this.md.findById(id)
+        tour.imgs.push(img)
+        tour.npics = tour.imgs.length
+        return tour.save()
+    }
+
+    async image_add2(id: string, file: Express.Multer.File) {
+        let tour = await this.md.findById(id)
+        // Конвертируем байты в base64
+        tour.files.push(file.buffer.toString('base64'))
+        tour.npics = tour.files.length
+        return tour.save()
     }
 }

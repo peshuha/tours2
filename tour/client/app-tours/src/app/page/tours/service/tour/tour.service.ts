@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy, OnInit} from '@angular/core';
 import {TourRestService} from "../rest/tour-rest.service";
-import {Observable, ReplaySubject, Subject} from "rxjs";
+import {Observable, ReplaySubject, Subject, of} from "rxjs";
 import {ITour, ITourFilter, TourType} from "@tour/lib-dto-js";
 import {TourLocationRestService} from "../rest/tour-location-rest.service";
 import {TourNearestRestService} from "../rest/tour-nearest-rest.service";
@@ -98,7 +98,7 @@ export class TourService implements OnInit, OnDestroy{
     if(!id || !this.tours) {
       return null
     }
-    return this.tours.find((tour) => tour._id.toLowerCase() === id.toLowerCase()) || null
+    return this.tours.find((tour) => tour._id?.toLowerCase() === id.toLowerCase()) || null
   }
 
   public TestError() {
@@ -111,5 +111,21 @@ export class TourService implements OnInit, OnDestroy{
 
   getTourLocation() {
     return this.restTourLocation.getTourLocation()
+  }
+
+  createTour(tour: ITour) {
+    return this.rest.create(tour)
+  }
+
+  imageAdd(id: string | undefined, img: File) {
+    return this.rest.img_add(id || "", img)
+  }
+
+  imageAdd2(id: string | undefined, img: File) {
+    return this.rest.img_add2(id || "", img)
+  }
+
+  getTour(id: string) {
+    return this.rest.getTour(id)
   }
 }

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {IOrder, IOrderKey} from "../../../../../../model/iorder";
 import {TreeNode} from "primeng/api";
 import {MOCK_ORDERS} from "../../../../../../mock/orders";
 import {BehaviorSubject, of, Subject, switchMap, withLatestFrom} from "rxjs";
+import { IOrder, IOrderKey } from '@tour/lib-dto-js';
 
 export type IOrderFilter = {
     // Группируем ли вообще

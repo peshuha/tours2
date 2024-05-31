@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from "../service/order.service";
 import {Observable, Subject, takeUntil} from "rxjs";
 import {TreeNode} from "primeng/api";
-import {IOrder} from "../../../../../../model/iorder";
+import { IOrder } from '@tour/lib-dto-js';
 
 @Component({
   selector: 'app-order-body',

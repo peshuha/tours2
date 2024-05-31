@@ -9,7 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProfileModule } from '../profile/profile.module';
 import { TourModule } from '../tour/tour.module';
-import { Module1Module } from './module1.module';
+import { ImageModule } from '../image/image.module';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { Module1Module } from './module1.module';
     AuthModule,
     ProfileModule,
     TourModule,
-    Module1Module,
+    ImageModule, 
   ],
   controllers: [],
   providers: [
