@@ -1,0 +1,45 @@
+<a [routerLink]="['../../tours-list']">Назад</a>
+<<<<<<< HEAD:tour/client/app-tours/src/app/page/tours/component/module/tour-info/tour-info.component.html
+<p>{{tour?.name}}</p>
+<img 
+  *ngFor="let idx of pics"
+  src="{{imgbaseurl}}/img?id={{tour?._id}}&idx={{idx}}" 
+  [alt]="tour?.name" 
+  height="150px"
+/>
+<div>
+<button (click)="Order()">Заказать</button>
+
+=======
+<p>{{ tour?.name }}</p>
+<div style="width: 100%">
+  <p-carousel
+    [value]="dtTours"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+  >
+    <ng-template let-tour pTemplate="item">
+      <div class="">
+        <div class="">
+          <img
+            src="assets/img/{{ tour.img }}"
+            [alt]="tour.name"
+            height="150px"
+          />
+        </div>
+        <!--      <div>-->
+        <!--        <h4 class="mb-1">{{ product.name }}</h4>-->
+        <!--        <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>-->
+        <!--        <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>-->
+        <!--        <div class="mt-5 flex align-items-center justify-content-center gap-2">-->
+        <!--          <p-button icon="pi pi-search" [rounded]="true" />-->
+        <!--          <p-button icon="pi pi-star-fill" [rounded]="true" severity="secondary" />-->
+        <!--        </div>-->
+        <!--      </div>-->
+      </div>
+    </ng-template>
+  </p-carousel>
+>>>>>>> a7cdc1d4547d926c2daac733fba0b1a8db41d291:tour/client/src/app/page/tours/component/module/tour-info/tour-info.component.html
+</div>
+
